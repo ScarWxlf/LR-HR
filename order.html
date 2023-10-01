@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LR&HR</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+    <div class="gd-back" style="position: fixed; z-index: -1; width: 100%; height: 100%;"></div>
+    <section id="Header">
+        <div class="container rounded-3 px-0">
+            <header class="d-flex justify-content-center py-3 b-clnav rounded-3 back-black">
+              <ul class="nav nav-pills">
+                <li class="nav-item"><a class="dll" href="./pricing.html"><button class="btn btn-primary rounded-pill px-3 ms-3" type="button" >Back</button></a></li>
+              </ul>
+            </header>
+          </div>
+    </section>
+    <div class="container back-black rounded-3 b-cl shadow-lg pt-4 mt-2" >
+        <div class="row"> 
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="input-group mb-4">
+                            <span class="input-group-text">Your email:</span>
+                            <input type="text" id="email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group mb-4">
+                            <div class="input-group-text" style="width: 100%;">
+                                <input id="VIP" class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                                <label class="ms-2" for="VIP">VIP</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="input-group">
+                            <label class="input-group-text" for="inputGroupSelect01">Comission type:</label>
+                            <select class="form-select" id="comType">
+                                <option selected>...</option>
+                                <option value="Mawshot">Mawshot</option>
+                                <option value="Booba">Booba</option>
+                                <option value="Pisa">Pisa</option>
+                                <option value="Popa">Popa </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="input-group">
+                            <div class="input-group-text" style="width: 100%;">
+                                <input id="NSFW" class="form-check-input mt-0" type="checkbox" aria-label="Checkbox for following text input">
+                                <label class="ms-2" for="NSFW">NSFW</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <span class="input-group-text" style="border-radius: 0px; border-radius: 5px 5px 0px 0px;">References</span>
+                        <div class="input-group mb-3" >
+                            <input type="file" class="form-control" id="references" multiple="multiple" style="border-radius: 0px; border-radius: 0px 0px 5px 5px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div>
+                    <span class="input-group-text" style="border-radius: 0px; border-radius: 5px 5px 0px 0px;">Order description</span>
+                    <div class="input-group mb-4">
+                        <textarea id="description" name="text" rows="2" cols="50" style="resize: none; height: 200px; width: 100%; border-radius: 0px 0px 5px 5px;"></textarea>
+                        <!-- <input style="height: 200px; border-radius: 0px 0px 5px 5px; word-wrap: break-word;" type="text" class="form-control" > -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-3 justify-content-center d-flex">
+                <button class="btn btn-primary rounded-pill px-3 ms-3" type="button" onclick="SubmitOrder()">Submit order</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function SubmitOrder(){
+        let email = document.getElementById("email").value;
+        let comType = document.getElementById("comType").value;
+        let checkNSFW = document.getElementById("NSFW").checked;
+        let checkVIP = document.getElementById("VIP").checked;
+        let references = document.getElementById("references").files;
+        let description = document.getElementById("description").value;
+        alert(description);
+        //alert(references[0].type);//name
+    }
+
+</script>
+</html>
