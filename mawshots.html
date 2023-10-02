@@ -28,9 +28,19 @@
         </div>
         <div class="container rounded-3">
             <header class="d-flex justify-content-center py-3 b-clnav rounded-3 back-black">
-                <div class="d-flex align-items-center me-3">
-                    <label style="color: white; padding: 0; margin: 0px 0px 0.6px 0px;">
-                        <input type="checkbox" name="mawshot" id="">Mawshot
+                <div class="d-flex align-items-center me-3 check-button justify-content-center">
+                    <label class="user-select-none p-0 " style="color: white;">
+                        <input class="d-none" type="checkbox" data-tag="mawshot">Mawshot
+                    </label>
+                </div>
+                <div class="d-flex align-items-center me-3 check-button justify-content-center">
+                    <label class="user-select-none p-0 " style="color: white;">
+                        <input class="d-none" type="checkbox" data-tag="booba">Booba
+                    </label>
+                </div>
+                <div class="d-flex align-items-center me-3 check-button justify-content-center">
+                    <label class="user-select-none p-0 " style="color: white;">
+                        <input class="d-none" type="checkbox" data-tag="pisa">Pisa
                     </label>
                 </div>
                 <button class="btn btn-primary rounded-pill" onclick="filter()">Search</button>
@@ -216,29 +226,20 @@
         imgIndex += 1;
     }
 
-    let isActive = true;
+    //let isActive = true;
     function filter() {
-        let kind = document.querySelector("#filterimgType").value;
+        let activeTags = Array.from(document.querySelectorAll("[data-tag]:checked")).map((e) => e.dataset.tag);
         let allImages = Array.from(document.querySelectorAll(`[data-kind]`));
-        let kindedImages = allImages.filter((e) => e.dataset.kind == kind);
-        if (isActive) {
-            allImages.forEach(img => {
-                img.style.display = "none";
-            });
-            kindedImages.forEach(img => {
-                img.style.display = "block";
-            });
-            isActive = false;
+        let kindedImages = allImages;
+        if (activeTags.length > 0) {
+            kindedImages = kindedImages.filter((e) => activeTags.includes(e.dataset.kind));
         }
-        else {
-            allImages.forEach(img => {
-                img.style.display = "block";
-            });
-            kindedImages.forEach(img => {
-                img.style.display = "none";
-            });
-            isActive = true;
-        }
+        allImages.forEach(img => {
+            img.style.display = "none";
+        });
+        kindedImages.forEach(img => {
+            img.style.display = "block";
+        });
     }
 </script>
 

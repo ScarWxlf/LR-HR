@@ -10,6 +10,24 @@
   background-color: #97c0ff !important;
 }
 
+
+.check-button{
+  padding: 0px 10px;
+  background-color: none;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #1363DF;
+}
+
+.check-button:has(input[type="checkbox"]:checked) {
+  background-color:#1365df4e;
+}
+
+.check-button:hover{
+  background-color: #1363DF;
+}
+
+
 .btn:disabled{
   background-color: #6776bc !important;
 }
