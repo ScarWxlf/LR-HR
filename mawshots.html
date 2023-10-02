@@ -27,23 +27,8 @@
             </header>
         </div>
         <div class="container rounded-3">
-            <header class="d-flex justify-content-center py-3 b-clnav rounded-3 back-black">
-                <div class="d-flex align-items-center me-3 check-button justify-content-center">
-                    <label class="user-select-none p-0 " style="color: white;">
-                        <input class="d-none" type="checkbox" data-tag="mawshot">Mawshot
-                    </label>
-                </div>
-                <div class="d-flex align-items-center me-3 check-button justify-content-center">
-                    <label class="user-select-none p-0 " style="color: white;">
-                        <input class="d-none" type="checkbox" data-tag="booba">Booba
-                    </label>
-                </div>
-                <div class="d-flex align-items-center me-3 check-button justify-content-center">
-                    <label class="user-select-none p-0 " style="color: white;">
-                        <input class="d-none" type="checkbox" data-tag="pisa">Pisa
-                    </label>
-                </div>
-                <button class="btn btn-primary rounded-pill" onclick="filter()">Search</button>
+            <header id="tag-buttons" class="d-flex justify-content-center py-3 b-clnav rounded-3 back-black">
+
             </header>
         </div>
     </section>
@@ -51,34 +36,18 @@
 
     <section id="mawshots" class="mb-3">
         <div class="container">
-            <div class="row" style="align-items: start;">
+            <div class="row masonry" style="align-items: start;">
                 <div id="col1" class="column">
-                    <a style="display: block;" id="imgmaw1" data-kind="mawshot" type="button" data-bs-toggle="modal"
-                        data-bs-target="#maw1">
-                        <img src="./images/mawshots/maw1.png">
-                    </a>
-                    <a style="display: block;" id="imgmaw2" data-kind="mawshot" type="button" data-bs-toggle="modal"
-                        data-bs-target="#maw2">
-                        <img src="./images/mawshots/maw2.png">
-                    </a>
+
                 </div>
                 <div id="col2" class="column">
-                    <a style="display: block;" id="imgmaw3" data-kind="mawshot" type="button" data-bs-toggle="modal"
-                        data-bs-target="#maw3">
-                        <img src="./images/mawshots/maw3.png">
-                    </a>
+
                 </div>
                 <div id="col3" class="column">
-                    <a style="display: block;" id="imgmaw4" data-kind="mawshot" type="button" data-bs-toggle="modal"
-                        data-bs-target="#maw4">
-                        <img src="./images/mawshots/maw4.jpg">
-                    </a>
+
                 </div>
                 <div id="col4" class="column">
-                    <a style="display: block;" id="imgmaw5" data-kind="mawshot" type="button" data-bs-toggle="modal"
-                        data-bs-target="#maw5">
-                        <img src="./images/mawshots/maw5.jpg">
-                    </a>
+
                 </div>
 
             </div>
@@ -131,45 +100,13 @@
     </section>
 
     <section id="allmodal">
-        <div class="modal fade" id="maw1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered justify-content-center">
-                <div class="modal-body py-0">
-                    <img src="./images/mawshots/maw1.png" alt="" height="650px">
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="maw2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered justify-content-center">
-                <div class="modal-body py-0">
-                    <img src="./images/mawshots/maw2.png" alt="" height="650px">
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="maw3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered justify-content-center">
-                <div class="modal-body py-0">
-                    <img src="./images/mawshots/maw3.png" alt="" height="650px">
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="maw4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered justify-content-center">
-                <div class="modal-body py-0">
-                    <img src="./images/mawshots/maw4.jpg" alt="" height="650px">
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="maw5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered justify-content-center">
-                <div class="modal-body py-0">
-                    <img src="./images/mawshots/maw5.jpg" alt="" height="650px">
-                </div>
-            </div>
-        </div>
+
     </section>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
+
     <template id="imgtemp">
         <a style="display: block;" id="imgmaw5" type="button" data-bs-toggle="modal" data-bs-target="#maw5">
             <img src="./images/mawshots/maw5.jpg">
@@ -182,6 +119,13 @@
                     <img src="./images/mawshots/maw5.jpg" alt="" height="650px">
                 </div>
             </div>
+        </div>
+    </template>
+    <template id="tagcheckbox">
+        <div class="d-flex align-items-center me-3 check-button justify-content-center" style="height: 40px;">
+            <label id="check-but" class="text-capitalize user-select-none p-0 " style="color: white;">
+                <input class="d-none" type="checkbox" data-tag="mawshot">Mawshot
+            </label>
         </div>
     </template>
 </body>
@@ -203,7 +147,7 @@
         //подучить компаратор
         //лямбда
         let column = Array.from(document.querySelectorAll("#col1, #col2, #col3, #col4")).reduce((prev, curr) => {
-            return prev.clientHeight < curr.clientHeight ? prev : curr;
+            return prev.clientHeight <= curr.clientHeight ? prev : curr;
         });
         //console.log(column);
 
@@ -215,6 +159,7 @@
         newImage.getElementById("imgmaw5").dataset.bsTarget = `#maw${imgIndex}`;
         newImage.getElementById("imgmaw5").dataset.kind = document.getElementById("imgType").value;
         newImage.querySelector("#imgmaw5 img").style.borderRadius = "10px";
+        addNewImage(i, document.getElementById("imgType").value, imgIndex);
         let currentDiv = column;
         currentDiv.appendChild(newImage);
 
@@ -226,21 +171,76 @@
         imgIndex += 1;
     }
 
+
+    let allImagesStatic = [];
+    let allTags = new Set();
+
+    function addNewImage(url, kind) {
+        allImagesStatic.push({ url, kind })
+        allTags.add(kind);
+    }
+    addNewImage("./images/mawshots/maw5.jpg", "mawshot");
+    addNewImage("./images/mawshots/maw4.jpg", "booba");
+    addNewImage("./images/mawshots/maw3.png", "pisa");
+    addNewImage("./images/mawshots/maw2.png", "booba");
+    addNewImage("./images/mawshots/maw1.png", "mawshot");
+
     //let isActive = true;
     function filter() {
         let activeTags = Array.from(document.querySelectorAll("[data-tag]:checked")).map((e) => e.dataset.tag);
-        let allImages = Array.from(document.querySelectorAll(`[data-kind]`));
-        let kindedImages = allImages;
-        if (activeTags.length > 0) {
-            kindedImages = kindedImages.filter((e) => activeTags.includes(e.dataset.kind));
-        }
-        allImages.forEach(img => {
-            img.style.display = "none";
-        });
-        kindedImages.forEach(img => {
-            img.style.display = "block";
-        });
+        show(activeTags);
     }
+
+    function getAllColumns() {
+        return Array.from(document.querySelector(".masonry").children);
+    }
+
+    function show(kinds = []) {
+        let kindedImages = allImagesStatic;
+        if (kinds.length > 0) {
+            kindedImages = kindedImages.filter((e) => kinds.includes(e.kind));
+        }
+        let columns = getAllColumns();
+        let modals = document.querySelector("#allmodal");
+        columns.forEach(col => {
+            col.replaceChildren();
+        })
+        modals.replaceChildren();
+
+        kindedImages.forEach((img, index) => {
+            let newImage = document.getElementById("imgtemp").content.cloneNode(true);
+            newImage.getElementById("imgmaw5").innerHTML = `<img src=${img.url} >`
+            newImage.getElementById("imgmaw5").dataset.bsTarget = `#maw${index}`;
+            newImage.getElementById("imgmaw5").dataset.kind = img.kind;
+            newImage.querySelector("#imgmaw5 img").style.borderRadius = "10px";
+            let column = getAllColumns().reduce((prev, curr) => {
+                return prev.clientHeight <= curr.clientHeight ? prev : curr;
+            });
+            column.appendChild(newImage);
+
+            let newModel = document.getElementById("modaltemp").content.cloneNode(true);
+            newModel.getElementById("modalimg").innerHTML = `<img src=${img.url} alt="" height="650px">`
+            newModel.getElementById("maw5").id = `maw${index}`;
+            let currentModal = document.getElementById("allmodal");
+            currentModal.appendChild(newModel);
+        })
+
+    }
+
+
+    function showBut(kind) {
+        let button = document.getElementById("tagcheckbox").content.cloneNode(true);
+        button.querySelector("#check-but").innerHTML = `<input class="d-none" type="checkbox" data-tag="${kind}" onchange="filter()">${kind}`;
+        let panel = document.querySelector("#tag-buttons");
+        panel.appendChild(button);
+    }
+
+    show();
+    let panel = document.querySelector("#tag-buttons");
+    panel.replaceChildren();
+    allTags.forEach(but => {
+        showBut(but);
+    })
 </script>
 
 </html>
