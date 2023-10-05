@@ -21,13 +21,22 @@
                             <button class="btn btn-primary rounded-pill px-3" type="button">Back</button>
                         </a>
                     </li>
-                    <button class="btn btn-primary rounded-pill px-3 ms-3" data-bs-toggle="modal"
-                        data-bs-target="#addimage">Add new image</button><!--onclick="addElement()"-->
+                    <button
+                        class="btn btn-primary rounded-pill px-3 ms-3 d-flex justify-content-center align-items-center"
+                        data-bs-toggle="modal" data-bs-target="#addimage">
+                        <p class="p-0 m-0">Add new image</p>
+                        <svg style="margin: 5px 0px 0px 5px" xmlns="http://www.w3.org/2000/svg" width="16"
+                            height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                        </svg>
+                    </button><!--onclick="addElement()"-->
                 </ul>
             </header>
         </div>
         <div class="container rounded-3">
-            <header id="tag-buttons" class="d-flex justify-content-center py-3 b-clnav rounded-3 back-black">
+            <header id="tag-buttons" class="d-flex justify-content-center py-3 b-clnav rounded-3 back-black"
+                style="flex-wrap: wrap;">
 
             </header>
         </div>
@@ -75,18 +84,87 @@
                     <div class="modal-footer">
                         <div class="input-group">
                             <label class="input-group-text" for="inputGroupSelect01">Comission type:</label>
-                            <select class="form-select" id="imgType">
-                                <option selected>...</option>
-                                <option value="mawshot">Mawshot</option>
-                                <option value="booba">Booba</option>
-                                <option value="pisa">Pisa</option>
-                                <option value="popa">Popa </option>
-                                <option value="sex">Sex </option>
-                            </select>
+                            <input id="adddropitem" list="kinds" name="myBrowser" />
+                            <datalist id="kinds">
+                            </datalist>
                         </div>
-                        <button type="button" class="btn btn-dark btn-imp" disabled
-                            onclick="addElement(); document.querySelector('#upimg').value=''; document.querySelector('#addimage .btn-dark').disabled = true"
-                            data-bs-dismiss="modal">Upload image</button>
+
+                        <template id="temp-act-tag">
+                            <div class="d-flex p-2 justify-content-between align-items-center ac-tag me-2 mb-2">
+                                <p class="m-0 me-2 text-capitalize" data-add-tag="sex">Mawshot</p>
+                                <div id="delete_button" class="my-btn rounded-1" style="margin-bottom: 3px;"
+                                    onclick="removeTag(this)"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                        height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z" />
+                                    </svg></div>
+                            </div>
+                        </template>
+
+                        <script>
+                            let allDropTags = new Set();
+
+                            const dropdown = document.getElementById("adddropitem");
+                            dropdown.addEventListener('keyup', function (event) {
+                                if (event.key === "Enter") {
+                                    let tag = document.getElementById("adddropitem").value;
+                                    document.getElementById("adddropitem").value = "";
+                                    addNewTag(tag);
+                                    addTagToImage(tag);
+                                }
+                            })
+
+                            function addNewTag(opt) {
+                                allDropTags.add(opt);
+                                let menu = document.getElementById("kinds");
+                                menu.replaceChildren();
+                                let dropdown = document.getElementById("kinds");
+                                dropdown.replaceChildren();
+                                allDropTags.forEach(opt => {
+                                    let uwu = document.createElement("option");
+                                    uwu.value = `${opt}`
+                                    menu.appendChild(uwu)
+                                })
+                            }
+
+                            let imageTags = new Set();
+                            function addTagToImage(addingTag) {
+                                if (addingTag === "") return;
+                                if (Array.from(imageTags).includes(addingTag)) return;
+                                imageTags.add(addingTag);
+                                console.log(imageTags);
+
+                                let tag = document.getElementById("temp-act-tag").content.cloneNode(true);
+                                let valueWithText = tag.querySelector("[data-add-tag]");
+                                valueWithText.dataset.addTag = addingTag;
+                                valueWithText.innerHTML = addingTag;
+                                let allTagsPanel = document.getElementById("activeTags");
+                                allTagsPanel.appendChild(tag);
+                            }
+
+                            function removeTag(elem) {
+                                elem.parentElement.remove();
+                                imageTags.delete(elem.parentElement.querySelector('[data-add-tag]').dataset.addTag)
+                            }
+
+                            function removeTags() {
+                                let tags = document.querySelector("#activeTags");
+                                tags.replaceChildren();
+                                imageTags.clear();
+                            }
+
+                        </script>
+
+
+                        <div id="activeTags" class="d-flex" style="flex-wrap: wrap;">
+
+                        </div>
+
+                        <div class="d-flex justify-content-end" style="width: 100%;">
+                            <button type="button" class="btn btn-dark btn-imp" disabled
+                                onclick="addElement(); document.querySelector('#upimg').value=''; this.disabled = true; removeTags()"
+                                data-bs-dismiss="modal">Upload image</button>
+                        </div>
                     </div>
                     <script>
                         function updateButton() {
@@ -122,7 +200,8 @@
         </div>
     </template>
     <template id="tagcheckbox">
-        <div class="d-flex align-items-center me-3 check-button justify-content-center" style="height: 40px;">
+        <div class="d-flex align-items-center me-2 ms-2 mb-1 mt-1 check-button justify-content-center"
+            style="height: 40px;">
             <label id="check-but" class="text-capitalize user-select-none p-0 " style="color: white;">
                 <input class="d-none" type="checkbox" data-tag="mawshot">Mawshot
             </label>
@@ -130,60 +209,37 @@
     </template>
 </body>
 <script>
-    let imgIndex = 6;
-    // function showFile(input) {
-    //     let file = input.files[0];
-    //     let reader = new FileReader();
-    //     reader.readAsDataURL(file);
-    //     let img = URL.createObjectURL(file);
-    //     reader.onload = function() {
-    //         console.log(reader.result);
-    //     };
-    //     console.log(img);
-    //     alert(`File name: ${file.name}`); // например, my.png
-    //     alert(`Last modified: ${file.lastModified}`); // например, 1552830408824
-    // }
     function addElement() {
-        //подучить компаратор
-        //лямбда
-        let column = Array.from(document.querySelectorAll("#col1, #col2, #col3, #col4")).reduce((prev, curr) => {
-            return prev.clientHeight <= curr.clientHeight ? prev : curr;
-        });
-        //console.log(column);
 
-        let newImage = document.getElementById("imgtemp").content.cloneNode(true);
         let uploadImage = document.getElementById("upimg").files[0];
-        let i = URL.createObjectURL(uploadImage);
-        newImage.getElementById("imgmaw5").innerHTML = `<img src=${i} >`
-        // newImage.getElementById("imgmaw5").setAttribute('data-bs-target', `#maw${imgIndex}`)
-        newImage.getElementById("imgmaw5").dataset.bsTarget = `#maw${imgIndex}`;
-        newImage.getElementById("imgmaw5").dataset.kind = document.getElementById("imgType").value;
-        newImage.querySelector("#imgmaw5 img").style.borderRadius = "10px";
-        addNewImage(i, document.getElementById("imgType").value, imgIndex);
-        let currentDiv = column;
-        currentDiv.appendChild(newImage);
-
-        let newModel = document.getElementById("modaltemp").content.cloneNode(true);
-        newModel.getElementById("modalimg").innerHTML = `<img src=${i} alt="" height="650px">`
-        newModel.getElementById("maw5").id = `maw${imgIndex}`;
-        let currentModal = document.getElementById("allmodal");
-        currentModal.appendChild(newModel);
-        imgIndex += 1;
+        let url = URL.createObjectURL(uploadImage);
+        let currentTags = Array.from(imageTags);
+        addNewImage(url, currentTags);
+        show();
     }
 
 
     let allImagesStatic = [];
     let allTags = new Set();
 
-    function addNewImage(url, kind) {
-        allImagesStatic.push({ url, kind })
-        allTags.add(kind);
+    function addNewImage(url, kinds = []) {
+        allImagesStatic.push({ url, kinds })
+        for (const kind of kinds) {
+            allTags.add(kind);
+            addNewTag(kind);
+        }
+
+        let panel = document.querySelector("#tag-buttons");
+        panel.replaceChildren();
+        allTags.forEach(but => {
+            showBut(but);
+        })
     }
-    addNewImage("./images/mawshots/maw5.jpg", "mawshot");
-    addNewImage("./images/mawshots/maw4.jpg", "booba");
-    addNewImage("./images/mawshots/maw3.png", "pisa");
-    addNewImage("./images/mawshots/maw2.png", "booba");
-    addNewImage("./images/mawshots/maw1.png", "mawshot");
+    addNewImage("./images/mawshots/maw5.jpg", ["mawshot"]);
+    addNewImage("./images/mawshots/maw4.jpg", ["booba"]);
+    addNewImage("./images/mawshots/maw3.png", ["pisa"]);
+    addNewImage("./images/mawshots/maw2.png", ["booba"]);
+    addNewImage("./images/mawshots/maw1.png", ["mawshot"]);
 
     //let isActive = true;
     function filter() {
@@ -197,8 +253,9 @@
 
     function show(kinds = []) {
         let kindedImages = allImagesStatic;
+
         if (kinds.length > 0) {
-            kindedImages = kindedImages.filter((e) => kinds.includes(e.kind));
+            kindedImages = kindedImages.filter((e) => e.kinds.some(k => kinds.includes(k)));
         }
         let columns = getAllColumns();
         let modals = document.querySelector("#allmodal");
@@ -211,7 +268,6 @@
             let newImage = document.getElementById("imgtemp").content.cloneNode(true);
             newImage.getElementById("imgmaw5").innerHTML = `<img src=${img.url} >`
             newImage.getElementById("imgmaw5").dataset.bsTarget = `#maw${index}`;
-            newImage.getElementById("imgmaw5").dataset.kind = img.kind;
             newImage.querySelector("#imgmaw5 img").style.borderRadius = "10px";
             let column = getAllColumns().reduce((prev, curr) => {
                 return prev.clientHeight <= curr.clientHeight ? prev : curr;
@@ -236,11 +292,6 @@
     }
 
     show();
-    let panel = document.querySelector("#tag-buttons");
-    panel.replaceChildren();
-    allTags.forEach(but => {
-        showBut(but);
-    })
 </script>
 
 </html>

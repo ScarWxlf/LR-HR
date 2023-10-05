@@ -10,6 +10,11 @@
   background-color: #97c0ff !important;
 }
 
+.ac-tag{
+  color: white;
+  background-color: rgba(0, 0, 113, 0.584); 
+  border-radius: 10px; 
+}
 
 .check-button{
   padding: 0px 10px;
